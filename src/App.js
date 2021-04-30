@@ -1,23 +1,28 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import Map from './components/Map';
+import Login from './components/Login';
+import Profile from './components/Profile';
+
+const pages = {
+  map: <Map/>,
+  login: <Login/>,
+  profile: <Profile/>
+};
+
 
 function App() {
+  const [nav, setNav] = useState('map');
+
+  const goToPage = (page) => {
+    setNav(page)
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header goToPage={goToPage}/>
+      {pages[nav]}
     </div>
   );
 }
